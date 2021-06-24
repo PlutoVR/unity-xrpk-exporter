@@ -16,6 +16,13 @@
     "Pluto",
     "XR Package"
   ],
+  "samples": [
+    {
+      "displayName": "Sample XRPK Scene",
+      "description": "Sample XRPK Scene",
+      "path": "Samples~/SampleXRPK"
+    }
+  ],
   "author": {
     "name": "Pluto",
     "email": "support@plutovr.com",
