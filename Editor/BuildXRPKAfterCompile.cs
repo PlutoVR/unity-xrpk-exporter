@@ -26,8 +26,7 @@ public class BuildXRPKAfterCompile
 
         string[] s = Application.dataPath.Split('/');
         string projectName = s[s.Length - 2];
-
-        string pathToBatchScript = Directory.GetCurrentDirectory() + "/Packages/com.pluto.xrpk-exporter/XRPKData/create-xrpk.bat";
+        string pathToBatchScript = Path.GetFullPath("Packages/com.pluto.xrpk-exporter/XRPKData/create-xrpk.bat");
 
         // copy default manifest
         // TODO: ingest JSON, change xrpk name, rewrite manifest
