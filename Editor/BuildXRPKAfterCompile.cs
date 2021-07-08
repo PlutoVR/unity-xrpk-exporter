@@ -42,7 +42,7 @@ public class BuildXRPKAfterCompile
         UnityEngine.Debug.Log("<color=#FFAAFF> XRPK Manifest.json created in " + pathToBuiltProject + "</color>");
 
         Process XRPKScriptExecutor = new Process();
-        string args = pathToBuiltProject + " " + projectName;
+        string args = "\"" + pathToBuiltProject + "\" " + projectName;
 
         // Unity logger for cmd line stuff
         var sb = new StringBuilder();
