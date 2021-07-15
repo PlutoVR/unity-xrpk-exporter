@@ -1,0 +1,16 @@
+{
+    "name": "MAMInterface",
+    "rootNamespace": "",
+    "references": [
+        "GUID:380d4a289918eec418427b08bb7ed2f0"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
