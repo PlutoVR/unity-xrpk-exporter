@@ -1,5 +1,5 @@
 ﻿const MAMInterface = {
-        InternalGetAppId: function () {
+        MAMGetAppId: function () {
             if(!window.AppState) return;
             var returnStr = window.AppState.appId;
             var buffer = _malloc(lengthBytesUTF8(returnStr) + 1);
@@ -8,7 +8,7 @@
             return buffer;
         },
 
-        InternalGetInitialPosition: function () {
+        MAMGetInitialPosition: function () {
             if(!window.AppState) return;
             var returnStr = window.AppState.initialPosition;
             var buffer = _malloc(lengthBytesUTF8(returnStr) + 1);
@@ -17,7 +17,7 @@
             return buffer;
         },
 
-        InternalGetModelLoader: function () {
+        MAMGetModelLoader: function () {
             if(!window.AppState) return;
             var returnStr = window.AppState.modelLoader;
             var buffer = _malloc(lengthBytesUTF8(returnStr) + 1);

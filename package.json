@@ -9,7 +9,7 @@
   "changelogUrl": "https://example.com/changelog.html",
   "licensesUrl": "https://example.com/licensing.html",
   "dependencies": {
-    "com.de-panther.webxr": "0.12.0-preview"
+    "com.de-panther.webxr": "0.12.1-preview"
   },
   "keywords": [
     "WebXR",

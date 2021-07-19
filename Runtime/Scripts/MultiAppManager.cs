@@ -8,26 +8,25 @@ public static class MultiAppManager
 {
 
     [DllImport("__Internal")]
-    private static extern string InternalGetAppId();
+    private static extern string MAMGetAppId();
 
     [DllImport("__Internal")]
-    private static extern string InternalGetInitialPosition();
+    private static extern string MAMGetInitialPosition();
 
     [DllImport("__Internal")]
-    private static extern string InternalGetModelLoader();
+    private static extern string MAMGetModelLoader();
 
     public static string GetAppId()
     {
-        return InternalGetAppId();
+        return MAMGetAppId();
     }
-
     public static string GetInitialPosition()
     {
-        return InternalGetInitialPosition();
+        return MAMGetInitialPosition();
     }
 
     public static string GetModelLoader()
     {
-        return InternalGetModelLoader();
+        return MAMGetModelLoader();
     }
 }
