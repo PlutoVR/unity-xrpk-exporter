@@ -17,7 +17,13 @@ public static class MultiAppManager
 	private static extern string MAMGetModelLoader();
 
 	[DllImport("__Internal")]
-	private static extern void MAMLaunchApp();
+	private static extern void MAMLaunchApp(string appUrl, string transform);
+
+	[DllImport("__Internal")]
+	private static extern void MAMGetApps();
+
+	[DllImport("__Internal")]
+	private static extern void MAMLaunchAppByNameId(string name, string id, string transform);
 
 	public static string GetAppId()
 	{
@@ -33,8 +39,18 @@ public static class MultiAppManager
 		return MAMGetModelLoader();
 	}
 
-	public static void LaunchApp(string appUrl, Transform transform)
+	public static void LaunchApp(string appUrl, string transform)
 	{
-		MAMLaunchApp();
+		MAMLaunchApp(appUrl, transform);
+	}
+
+	public static void GetApps()
+	{
+		MAMGetApps();
+	}
+
+	public static void LaunchAppByNameId(string name, string id, string transform)
+	{
+		MAMLaunchAppByNameId(name, id, transform);
 	}
 }
