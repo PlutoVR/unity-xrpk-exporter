@@ -39,9 +39,9 @@ public static class MultiAppManager
 		return MAMGetModelLoader();
 	}
 
-	public static void LaunchApp(string appUrl, string transform)
+	public static void LaunchApp(string appUrl, Vector3 position, Quaternion rotation, Vector3 scale)
 	{
-		MAMLaunchApp(appUrl, transform);
+		MAMLaunchApp(appUrl, transformJSONFromElements(position, rotation, scale));
 	}
 
 	public static void GetApps()
@@ -49,8 +49,17 @@ public static class MultiAppManager
 		MAMGetApps();
 	}
 
-	public static void LaunchAppByNameId(string name, string id, string transform)
+	public static void LaunchAppByNameId(string name, string id, Vector3 position, Quaternion rotation, Vector3 scale)
 	{
-		MAMLaunchAppByNameId(name, id, transform);
+		MAMLaunchAppByNameId(name, id, transformJSONFromElements(position, rotation, scale));
+	}
+
+	private static string transformJSONFromElements(Vector3 position, Quaternion rotation, Vector3 scale)
+	{
+        return @$"{{
+            ""position"": {{ ""x"":{position.x}, ""y"":{position.y}, ""z"":{-position.z} }},
+            ""rotation"": {{ ""x"":{rotation.x}, ""y"":{rotation.y}, ""z"":{rotation.z}, ""w"":{rotation.w} }},
+            ""scale"": {{ ""x"":{scale.x}, ""y"":{scale.y}, ""z"":{scale.z} }}
+        }}";
 	}
 }
