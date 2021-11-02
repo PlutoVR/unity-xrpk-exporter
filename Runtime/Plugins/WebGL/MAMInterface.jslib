@@ -33,7 +33,7 @@
          */
         MAMLaunchApp: function (appUrl, transform) {
             if (!window.AppState) return;
-            console.log("** launching ** ", appUrl);
+
             window.parent.dispatchEvent(
                 new CustomEvent("plutomae-xrpk-event", {
                     detail: {
@@ -48,8 +48,6 @@
 
         MAMLaunchAppByNameId: function (name, id, transform) {
             if (!window.AppState) return;
-
-            console.log("** launching ** ", name);
 
             window.parent.dispatchEvent(
                 new CustomEvent("plutomae-xrpk-event", {
@@ -66,17 +64,10 @@
         MAMGetApps: function (receiverName, dataMethodName, errorMethodName) {
             if (!window.AppState) return;
 
-            console.log("### in MAMGetApps")
-            console.log("### unityInstance ", unityInstance)
-            console.log("### window parent unityInstance ", window.parent.unityInstance)
-
             const uuid = Math.random().toString()
             const listener = function (e) {
-                console.log("### in listener :: pre")
                 if (e.detail.responseId !== uuid) return;
-                console.log("### in listener :: post")
                 if (!unityInstance) {
-                    console.log("no instance -- aborting")
                     return
                 }
                 const data = JSON.stringify(e.detail.data)
@@ -95,8 +86,6 @@
                     responseId: uuid
                 },
             })
-
-            console.log("### dispatching: ", toDispatch);
 
             window.parent.dispatchEvent(toDispatch);
         }
