@@ -63,7 +63,7 @@
             );
         },
 
-        MAMGetApps: function () {
+        MAMGetApps: function (receiverName, dataMethodName, errorMethodName) {
             if (!window.AppState) return;
 
             console.log("### in MAMGetApps")
@@ -82,8 +82,8 @@
                 const data = JSON.stringify(e.detail.data)
                 const error = JSON.stringify(e.detail.error)
 
-                if (data) unityInstance.SendMessage("MultiAppListener", "HandleAppListData", data);
-                if (error) unityInstance.SendMessage("MultiAppListener", "HandleAppListError", error);
+                if (data) unityInstance.SendMessage(Pointer_stringify(receiverName), Pointer_stringify(dataMethodName), data);
+                if (error) unityInstance.SendMessage(Pointer_stringify(receiverName), Pointer_stringify(errorMethodName), error);
             }
 
             window.parent.addEventListener("plutomae-event-promise-response", listener)

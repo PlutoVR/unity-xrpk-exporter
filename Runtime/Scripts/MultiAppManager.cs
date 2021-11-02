@@ -20,7 +20,7 @@ public static class MultiAppManager
 	private static extern void MAMLaunchApp(string appUrl, string transform);
 
 	[DllImport("__Internal")]
-	private static extern void MAMGetApps();
+	private static extern void MAMGetApps(string receiverName, string dataMethodName, string errorMethodName);
 
 	[DllImport("__Internal")]
 	private static extern void MAMLaunchAppByNameId(string name, string id, string transform);
@@ -44,9 +44,9 @@ public static class MultiAppManager
 		MAMLaunchApp(appUrl, transformJSONFromElements(position, rotation, scale));
 	}
 
-	public static void GetApps()
+	public static void GetApps(string receiverName, string dataMethodName, string errorMethodName)
 	{
-		MAMGetApps();
+		MAMGetApps(receiverName, dataMethodName, errorMethodName);
 	}
 
 	public static void LaunchAppByNameId(string name, string id, Vector3 position, Quaternion rotation, Vector3 scale)
