@@ -61,6 +61,24 @@
             );
         },
 
+        MAMLaunchAssetByNameId: function (name, id, transform) {
+            if (!window.AppState) return;
+
+            window.parent.dispatchEvent(
+                new CustomEvent("plutomae-xrpk-event", {
+                    detail: {
+                        type: "launch-asset-by-name-id",
+                        name: Pointer_stringify(name),
+                        uuid: Pointer_stringify(id),
+                        transform: JSON.parse(Pointer_stringify(transform)),
+                        // revisit the next two
+                        isPinned: false,
+                        isStatic: false,
+                    },
+                })
+            );
+        },
+
         MAMGetApps: function (receiverName, dataMethodName, errorMethodName) {
             if (!window.AppState) return;
 
@@ -88,8 +106,36 @@
             })
 
             window.parent.dispatchEvent(toDispatch);
-        }
+        },
 
+        MAMGetAssets: function (receiverName, dataMethodName, errorMethodName) {
+            if (!window.AppState) return;
+
+            const uuid = Math.random().toString()
+            const listener = function (e) {
+                if (e.detail.responseId !== uuid) return;
+                if (!unityInstance) {
+                    return
+                }
+                const data = JSON.stringify(e.detail.data)
+                const error = JSON.stringify(e.detail.error)
+
+                if (data) unityInstance.SendMessage(Pointer_stringify(receiverName), Pointer_stringify(dataMethodName), data);
+                if (error) unityInstance.SendMessage(Pointer_stringify(receiverName), Pointer_stringify(errorMethodName), error);
+            }
+
+            window.parent.addEventListener("plutomae-event-promise-response", listener)
+
+            const toDispatch = new CustomEvent("plutomae-xrpk-event", {
+                detail: {
+                    type: "get-saved-assets",
+                    appId: window.AppState.appId,
+                    responseId: uuid
+                },
+            })
+
+            window.parent.dispatchEvent(toDispatch);
+        }
 };
 
 mergeInto(LibraryManager.library, MAMInterface);
