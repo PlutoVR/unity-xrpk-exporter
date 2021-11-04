@@ -23,7 +23,13 @@ public static class MultiAppManager
 	private static extern void MAMGetApps(string receiverName, string dataMethodName, string errorMethodName);
 
 	[DllImport("__Internal")]
+	private static extern void MAMGetAssets(string receiverName, string dataMethodName, string errorMethodName);
+
+	[DllImport("__Internal")]
 	private static extern void MAMLaunchAppByNameId(string name, string id, string transform);
+
+	[DllImport("__Internal")]
+	private static extern void MAMLaunchAssetByNameId(string name, string id, string transform);
 
 	public static string GetAppId()
 	{
@@ -39,9 +45,9 @@ public static class MultiAppManager
 		return MAMGetModelLoader();
 	}
 
-	public static void LaunchApp(string appUrl, Vector3 position, Quaternion rotation, Vector3 scale)
+	public static void LaunchApp(string appUrl, Vector3 position, Quaternion quaternion, Vector3 scale)
 	{
-		MAMLaunchApp(appUrl, transformJSONFromElements(position, rotation, scale));
+		MAMLaunchApp(appUrl, transformJSONFromElements(position, quaternion, scale));
 	}
 
 	public static void GetApps(string receiverName, string dataMethodName, string errorMethodName)
@@ -49,16 +55,27 @@ public static class MultiAppManager
 		MAMGetApps(receiverName, dataMethodName, errorMethodName);
 	}
 
-	public static void LaunchAppByNameId(string name, string id, Vector3 position, Quaternion rotation, Vector3 scale)
+	public static void GetAssets(string receiverName, string dataMethodName, string errorMethodName)
 	{
-		MAMLaunchAppByNameId(name, id, transformJSONFromElements(position, rotation, scale));
+		MAMGetAssets(receiverName, dataMethodName, errorMethodName);
 	}
 
-	private static string transformJSONFromElements(Vector3 position, Quaternion rotation, Vector3 scale)
+	public static void LaunchAppByNameId(string name, string id, Vector3 position, Quaternion quaternion, Vector3 scale)
+	{
+		MAMLaunchAppByNameId(name, id, transformJSONFromElements(position, quaternion, scale));
+	}
+
+	public static void LaunchAssetByNameId(string name, string id, Vector3 position, Quaternion quaternion, Vector3 scale)
+	{
+		MAMLaunchAssetByNameId(name, id, transformJSONFromElements(position, quaternion, scale));
+	}
+
+
+	private static string transformJSONFromElements(Vector3 position, Quaternion quaternion, Vector3 scale)
 	{
         return @$"{{
             ""position"": {{ ""x"":{position.x}, ""y"":{position.y}, ""z"":{-position.z} }},
-            ""rotation"": {{ ""x"":{rotation.x}, ""y"":{rotation.y}, ""z"":{rotation.z}, ""w"":{rotation.w} }},
+            ""quaternion"": {{ ""x"":{quaternion.x}, ""y"":{quaternion.y}, ""z"":{quaternion.z}, ""w"":{quaternion.w} }},
             ""scale"": {{ ""x"":{scale.x}, ""y"":{scale.y}, ""z"":{scale.z} }}
         }}";
 	}
